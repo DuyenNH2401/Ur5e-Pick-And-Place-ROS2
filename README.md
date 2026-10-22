@@ -78,8 +78,8 @@ flowchart TD
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/<your-username>/ur5e-pick-and-place-ros2.git
-cd ur5e-pick-and-place-ros2
+git clone https://github.com/DuyenNH2401/Ur5e-Pick-And-Place-ROS2.git
+cd Ur5e-Pick-And-Place-ROS2
 ```
 
 ### 2. Install Dependencies
