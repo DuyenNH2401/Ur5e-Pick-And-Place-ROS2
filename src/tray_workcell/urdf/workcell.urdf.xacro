@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ur5e_workcell">
+  <xacro:arg name="base_xyz" default="0 0 0.75" />
+  <xacro:arg name="object_ids" default="block_0 block_1 block_2 block_3 block_4 block_5" />
+  <xacro:arg name="controllers_file" default="$(find tray_workcell)/config/controllers.yaml" />
+  <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" />
+  <xacro:include filename="$(find robotiq_description)/urdf/robotiq_2f_85_macro.urdf.xacro" />
+  <link name="world" />
+  <xacro:ur_robot name="ur5e" tf_prefix="" parent="world"
+    joint_limits_parameters_file="$(find ur_description)/config/ur5e/joint_limits.yaml"
+    kinematics_parameters_file="$(find ur_description)/config/ur5e/default_kinematics.yaml"
+    physical_parameters_file="$(find ur_description)/config/ur5e/physical_parameters.yaml"
+    visual_parameters_file="$(find ur_description)/config/ur5e/visual_parameters.yaml"
+    force_abs_paths="true">
+    <origin xyz="$(arg base_xyz)" rpy="0 0 0" />
+  </xacro:ur_robot>
+  <xacro:robotiq_gripper name="robotiq" prefix="" parent="tool0" include_ros2_control="false">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:robotiq_gripper>
+  <link name="tcp" />
+  <joint name="gripper_tcp_joint" type="fixed">
+    <parent link="robotiq_85_base_link" />
+    <child link="tcp" />
+    <origin xyz="0 0 0.145" rpy="0 0 0" />
+  </joint>
+  <gazebo reference="robotiq_85_base_joint">
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <ros2_control name="WorkcellSystem" type="system">
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+    <xacro:macro name="controlled_joint" params="name initial">
+      <joint name="${name}">
+        <command_interface name="position" />
+        <state_interface name="position">
+          <param name="initial_value">${initial}</param>
+        </state_interface>
+        <state_interface name="velocity" />
+      </joint>
+    </xacro:macro>
+    <xacro:controlled_joint name="shoulder_pan_joint" initial="0.0" />
+    <xacro:controlled_joint name="shoulder_lift_joint" initial="${-pi/2}" />
+    <xacro:controlled_joint name="elbow_joint" initial="${pi/2}" />
+    <xacro:controlled_joint name="wrist_1_joint" initial="${-pi/2}" />
+    <xacro:controlled_joint name="wrist_2_joint" initial="${-pi/2}" />
+    <xacro:controlled_joint name="wrist_3_joint" initial="0.0" />
+    <xacro:controlled_joint name="robotiq_85_left_knuckle_joint" initial="0.0" />
+    <xacro:macro name="mimic_state" params="name">
+      <joint name="${name}">
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+      </joint>
+    </xacro:macro>
+    <xacro:mimic_state name="robotiq_85_right_knuckle_joint" />
+    <xacro:mimic_state name="robotiq_85_left_inner_knuckle_joint" />
+    <xacro:mimic_state name="robotiq_85_right_inner_knuckle_joint" />
+    <xacro:mimic_state name="robotiq_85_left_finger_tip_joint" />
+    <xacro:mimic_state name="robotiq_85_right_finger_tip_joint" />
+  </ros2_control>
+  <gazebo>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(arg controllers_file)</parameters>
+    </plugin>
+    <xacro:macro name="object_joints" params="ids">
+      <xacro:if value="${len(ids) &gt; 0}">
+        <plugin filename="gz-sim-detachable-joint-system" name="gz::sim::systems::DetachableJoint">
+          <parent_link>robotiq_85_base_link</parent_link>
+          <child_model>${ids[0]}</child_model>
+          <child_link>link</child_link>
+          <attach_topic>/workcell/grasp/${ids[0]}/attach</attach_topic>
+          <detach_topic>/workcell/grasp/${ids[0]}/detach</detach_topic>
+          <output_topic>/workcell/grasp/${ids[0]}/state</output_topic>
+        </plugin>
+        <xacro:object_joints ids="${ids[1:]}" />
+      </xacro:if>
+    </xacro:macro>
+    <xacro:object_joints ids="${'$(arg object_ids)'.split()}" />
+  </gazebo>
+</robot>

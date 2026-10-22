@@ -1,0 +1,43 @@
+# ROS 2 Colcon build artifacts
+build/
+install/
+log/
+
+# Runtime test outputs & local runs
+.runtime/
+ros-log/
+/tmp/tray-workcell-result.yaml
+*.log
+
+# Python cache, virtual environments & compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# Editor & OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Temporary scratch recordings
+/tmp/*.sdf
+/tmp/*.png
+/tmp/*.mp4
+
+# Track assets folder
+!assets/
+!assets/*.gif
+!assets/*.mp4
+!assets/*.png

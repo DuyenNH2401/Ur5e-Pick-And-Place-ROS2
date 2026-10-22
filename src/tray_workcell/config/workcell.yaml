@@ -1,0 +1,35 @@
+world: tray_workcell
+table:
+  center: [0.35, 0.0]
+  size: [1.1, 1.2]
+  height: 0.75
+  thickness: 0.04
+robot:
+  base: [0.0, 0.0, 0.75]
+  home: [0.0, -1.570796327, 1.570796327, -1.570796327, -1.570796327, 0.0]
+tray:
+  center: [0.45, 0.26]
+  rows: 2
+  columns: 3
+  cell_size: [0.12, 0.12]
+  wall: 0.006
+  wall_height: 0.025
+  floor: 0.008
+object_size: 0.03
+object_mass: 0.025
+objects:
+  - {id: block_0, xy: [0.35, -0.32], slot: 0, color: [0.9, 0.15, 0.15, 1.0]}
+  - {id: block_1, xy: [0.45, -0.32], slot: 1, color: [0.15, 0.7, 0.2, 1.0]}
+  - {id: block_2, xy: [0.55, -0.32], slot: 2, color: [0.15, 0.3, 0.9, 1.0]}
+  - {id: block_3, xy: [0.35, -0.22], slot: 3, color: [0.95, 0.75, 0.1, 1.0]}
+  - {id: block_4, xy: [0.45, -0.22], slot: 4, color: [0.65, 0.2, 0.8, 1.0]}
+  - {id: block_5, xy: [0.55, -0.22], slot: 5, color: [0.1, 0.75, 0.8, 1.0]}
+motion:
+  approach: 0.12
+  carry_height: 1.05
+  grasp_z_offset: 0.008
+  release_clearance: 0.010
+  velocity_scale: 0.25
+  acceleration_scale: 0.20
+  cartesian_step: 0.005
+  placement_tolerance: 0.015

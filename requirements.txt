@@ -1,0 +1,18 @@
+# Python dependencies for development, testing, and demo recording
+# Note: Core ROS 2 and Gazebo libraries are managed via `rosdep` and system packages.
+
+# Configuration & data handling
+pyyaml>=6.0
+numpy>=1.24.0
+
+# Testing
+pytest>=8.0.0
+pytest-cov>=4.1.0
+
+# Image & video processing for demo recording
+opencv-python>=4.8.0
+pillow>=10.0.0
+
+# Code formatting and linting
+ruff>=0.4.0
+black>=24.0.0
