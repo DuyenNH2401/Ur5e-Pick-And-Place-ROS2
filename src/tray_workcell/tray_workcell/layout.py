@@ -1,6 +1,6 @@
 """One geometry source for Gazebo and the MoveIt planning scene (SI units)."""
-from pathlib import Path
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
 import yaml
 

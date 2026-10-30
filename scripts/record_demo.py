@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Run the Gazebo pick-and-place simulation with camera and record demo MP4 & GIF."""
-from datetime import datetime
 import os
-from pathlib import Path
 import signal
 import subprocess
 import threading
 import time
 import uuid
+from datetime import datetime
+from pathlib import Path
 
 import cv2
 import numpy as np
@@ -81,7 +81,7 @@ def main():
     ]
 
     print(f"[Recorder] Partition: {partition}")
-    print(f"[Recorder] Launching simulation with camera...")
+    print("[Recorder] Launching simulation with camera...")
     print(f"[Recorder] Run directory: {run_dir}")
 
     launch_log = run_dir / "launch.log"
@@ -99,8 +99,8 @@ def main():
                             print("[Recorder] Task completed successfully! Capturing extra frames...", flush=True)
                             time.sleep(3)
                             break
-                    except Exception:
-                        pass
+                    except (OSError, yaml.YAMLError):
+                        continue
         except KeyboardInterrupt:
             print("[Recorder] Stopped by user.")
         finally:

@@ -1,7 +1,7 @@
 """Integration checks against the installed ROS descriptions after colcon build."""
-from pathlib import Path
 import sys
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src/tray_workcell"))

@@ -1,7 +1,7 @@
 """Read object positions and operate Gazebo's built-in grasp joints."""
-from functools import partial
 import math
 import threading
+from functools import partial
 
 from gz.msgs.empty_pb2 import Empty
 from gz.msgs.pose_v_pb2 import Pose_V

@@ -1,12 +1,12 @@
 """Pick the blocks one by one and place them in the tray."""
 import math
-from pathlib import Path
 import threading
+from pathlib import Path
 
 import rclpy
+import yaml
 from rclpy.executors import SingleThreadedExecutor
 from rclpy.node import Node
-import yaml
 
 from .gazebo_grasp import Gazebo
 from .moveit_client import MoveItClient, collision_box
@@ -105,7 +105,7 @@ def main(args=None):
     try:
         task = PickPlace(node)
         task.run()
-    except Exception as error:
+    except Exception as error:  # noqa: BLE001
         code = 1
         node.get_logger().error(str(error))
         if task:

@@ -8,7 +8,12 @@ from trajectory_msgs.msg import JointTrajectoryPoint
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src/tray_workcell"))
 from tray_workcell.moveit_client import (
-    downward_pose, pose_constraints, cartesian_request, validate_cartesian, set_allowed_touch, MoveItClient,
+    MoveItClient,
+    cartesian_request,
+    downward_pose,
+    pose_constraints,
+    set_allowed_touch,
+    validate_cartesian,
 )
 
 
@@ -58,7 +63,7 @@ def test_partial_or_failed_cartesian_paths_are_never_executed():
 
 
 def test_allowed_touch_preserves_other_collision_rules_and_can_revoke():
-    from moveit_msgs.msg import AllowedCollisionMatrix, AllowedCollisionEntry
+    from moveit_msgs.msg import AllowedCollisionEntry, AllowedCollisionMatrix
     matrix = AllowedCollisionMatrix(entry_names=["arm", "wall"],
         entry_values=[AllowedCollisionEntry(enabled=[False, True]), AllowedCollisionEntry(enabled=[True, False])])
     set_allowed_touch(matrix, "block_0", ["finger"], True)
