@@ -3,7 +3,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src/tray_workcell"))
-from tray_workcell.layout import load_layout, placements, world_sdf, obstacles
+from tray_workcell.layout import load_layout, obstacles, placements, world_sdf
 
 
 def test_six_distinct_slots_fit_inside_tray():

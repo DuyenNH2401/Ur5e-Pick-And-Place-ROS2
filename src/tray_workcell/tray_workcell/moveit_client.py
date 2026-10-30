@@ -4,13 +4,20 @@ import math
 import time
 
 from action_msgs.msg import GoalStatus
-from control_msgs.action import ParallelGripperCommand, FollowJointTrajectory
+from control_msgs.action import FollowJointTrajectory, ParallelGripperCommand
 from geometry_msgs.msg import Pose, Quaternion
 from moveit_msgs.action import ExecuteTrajectory, MoveGroup
 from moveit_msgs.msg import (
-    AllowedCollisionEntry, AttachedCollisionObject, CollisionObject, Constraints,
-    JointConstraint, MoveItErrorCodes, OrientationConstraint, PlanningScene,
-    PlanningSceneComponents, PositionConstraint,
+    AllowedCollisionEntry,
+    AttachedCollisionObject,
+    CollisionObject,
+    Constraints,
+    JointConstraint,
+    MoveItErrorCodes,
+    OrientationConstraint,
+    PlanningScene,
+    PlanningSceneComponents,
+    PositionConstraint,
 )
 from moveit_msgs.srv import ApplyPlanningScene, GetCartesianPath, GetPlanningScene
 from rclpy.action import ActionClient

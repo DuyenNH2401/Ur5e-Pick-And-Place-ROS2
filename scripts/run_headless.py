@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Run the six-block Gazebo demo without windows and save its result."""
-from datetime import datetime
 import os
-from pathlib import Path
 import signal
 import subprocess
 import uuid
+from datetime import datetime
+from pathlib import Path
 
 import yaml
 

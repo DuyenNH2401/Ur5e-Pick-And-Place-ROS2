@@ -1,12 +1,12 @@
 """Prepare the robot, world and MoveIt configuration for launch."""
-from itertools import combinations
-from pathlib import Path
 import tempfile
 import xml.etree.ElementTree as ET
+from itertools import combinations
+from pathlib import Path
 
-from ament_index_python.packages import get_package_share_directory
 import xacro
 import yaml
+from ament_index_python.packages import get_package_share_directory
 
 from .layout import load_layout, task_data, world_sdf
 
